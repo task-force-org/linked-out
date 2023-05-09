@@ -7,5 +7,6 @@ const {getAllUsers}=require("../controller/users")
 
 
 router.get('/All',getAllUsers)
+
 // complete your routes for the users
 module.exports = router;
