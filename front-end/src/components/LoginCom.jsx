@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import $ from "jquery";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "../css/login.css";
 const API = "http://localhost:5000/individual";
 
 function LoginCom() {
@@ -60,64 +63,159 @@ function LoginCom() {
     console.log(user);
     navigate("/");
   };
+  useEffect(() => {
+    const signUpButton = $("#signUp");
+    const signInButton = $("#signIn");
+    const container = $("#container");
+
+    signUpButton.on("click", () => {
+      container.addClass("right-panel-active");
+    });
+
+    signInButton.on("click", () => {
+      container.removeClass("right-panel-active");
+    });
+
+    return () => {
+      // Clean up event listeners when the component unmounts
+      signUpButton.off("click");
+      signInButton.off("click");
+    };
+  }, []); //
 
   return (
     <div className="form-structor">
       <h1></h1>
       {view === "signup" && (
         <div className="signup">
-          <h2 className="form-title" id="signup">
-            <span>or</span>Sign up
-          </h2>
-          <div className="form-holder">
-            <input
-              type="text"
-              className="input"
-              placeholder="Full Name"
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-              type="email"
-              className="input"
-              placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              type="password"
-              className="input"
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button className="submit-btn" onClick={handleSubmit}>
-            Sign up
-          </button>
-        </div>
-      )}
-      {view === "login" && (
-        <div className="login slide-up">
-          <div className="center">
-            <h2 className="form-title" id="login">
-              <span>or</span>Log in
-            </h2>
-            <div className="form-holder">
-              <input
-                type="email"
-                className="input"
-                placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <input
-                type="password"
-                className="input"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
+          <h2>Weekly Coding Challenge #1: Sign in/up Form</h2>
+          <div class="container" id="container">
+            <div class="form-container sign-up-container">
+              <form action="#">
+                <h1>Create Account</h1>
+                <div class="social-container">
+                  <a href="#" class="social">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                  <a href="#" class="social">
+                    <i class="fab fa-google-plus-g"></i>
+                  </a>
+                  <a href="#" class="social">
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+                </div>
+                <span>or use your email for registration</span>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  class="input"
+                  id="signup-name"
+                  required
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  class="input"
+                  id="signup-email"
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  class="input"
+                  id="signup-password"
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <button
+                  class="submit-btn"
+                  id="signup-btn"
+                  onClick={handleSubmit}
+                >
+                  Sign Up
+                </button>
+              </form>
             </div>
-            <button className="submit-btn" onClick={handleLogin}>
-              Log in
-            </button>
+            <div class="form-container sign-in-container">
+              <form action="#">
+                <h1>Sign in</h1>
+                <div class="social-container">
+                  <a href="#" class="social">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                  <a href="#" class="social">
+                    <i class="fab fa-google-plus-g"></i>
+                  </a>
+                  <a href="#" class="social">
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+                </div>
+                <span>or use your account</span>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  class="input"
+                  id="login-email"
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  class="input"
+                  id="login-password"
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <a href="#" class="forgot-password">
+                  Forgot your password?
+                </a>
+                <button class="submit-btn" id="login-btn">
+                  Sign In
+                </button>
+              </form>
+            </div>
+            <div class="overlay-container">
+              <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                  <h1>Welcome Back!</h1>
+                  <p>
+                    To keep connected with us please login with your personal
+                    info
+                  </p>
+                  <button class="ghost" id="signIn">
+                    Sign In
+                  </button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                  <h1>Hello, Friend!</h1>
+                  <p>Enter your personal details and start journey with us</p>
+                  <button class="ghost" id="signUp">
+                    Sign Up
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <footer>
+            <p>
+              Created with <i class="fa fa-heart"></i> by
+              <a target="_blank" href="https://florin-pop.com">
+                Florin Pop
+              </a>
+              - Read how I created this and how you can join the challenge
+              <a
+                target="_blank"
+                href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/"
+              >
+                here
+              </a>
+              .
+            </p>
+          </footer>
         </div>
       )}
       {view === "profile" && (

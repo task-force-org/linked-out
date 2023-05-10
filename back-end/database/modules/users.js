@@ -16,7 +16,7 @@ module.exports = {
   },
 
   addOne: function (data, callback) {
-    // Upload profile_pic to Cloudinary
+    // Upload pic to Cloudinary
     cloudinary.uploader.upload(data.profile_pic, (err, result) => {
       if (err) callback(err, null)
       else data.profile_pic = result.secure_url;
@@ -30,9 +30,9 @@ module.exports = {
   },
 
   updateOne: function (id, data, callback) {
-    // Check if profile_pic is being updated
+    // Check if picture is updated
     if (data.profile_pic) {
-      // Upload new profile_pic to Cloudinary
+      // Upload newpic to Cloudinary
       cloudinary.uploader.upload(data.profile_pic, (err, result) => {
         if (err) callback(err, null);
         else data.profile_pic = result.secure_url;
