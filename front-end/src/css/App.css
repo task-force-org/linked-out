@@ -30,12 +30,15 @@
   color: #0073b1;
 }
 .navbar {
-  display: flex;
+  
+  display: fixed;
   justify-content: space-between;
   align-items: center;
   background-color: #0077b5;
   color: white;
   padding: 1rem;
+  
+ 
 }
 
 .navbar__logo img {
@@ -65,4 +68,54 @@
 .logo{
   display: flex;
   background-size:55ch;
+}
+
+
+.card {
+  margin: auto;
+  width: 50%;
+  padding: auto;
+}
+
+.img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  padding: auto;
+  margin: auto;
+}
+
+#center{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card {
+  margin: auto;
+  width: 50%;
+  padding: auto;
+}
+
+.img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  padding: auto;
+  margin: auto;
+}
+
+#center{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.fix{
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+}
+
+.all{
+  padding-top: 100px;
 }

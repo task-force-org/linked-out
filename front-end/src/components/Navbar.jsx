@@ -1,12 +1,19 @@
 import React from "react";
 
+
+
+
+
 function Navbar() {
+
+
+  
   return (
     <nav className="navbar">
       <div className="navbar__logo">
         <img
           className="logo"
-          src="https://o.remove.bg/downloads/611fc39d-cfa1-4fb9-910a-63fe4c96c63d/image-removebg-preview.png"
+          src="https://www.dallasdigitalmarketers.org/wp-content/uploads/2017/06/linkedoutlogo060717.jpg"
           alt="Logo"
         />
       </div>
@@ -18,7 +25,7 @@ function Navbar() {
         <a href="#">Notifications</a>
       </div>
       <div className="navbar__search">
-        <input type="text" placeholder="Search" />
+        <input type="text" placeholder="Search..." />
       </div>
     </nav>
   );

@@ -1,12 +1,14 @@
 import React,{useEffect,useState} from "react";
-import "../App.css"
+import { useLocation } from 'react-router-dom'
+import "../onePost.css"
 import "bootstrap/dist/css/bootstrap.css";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image'
 import { MDBRow, MDBCol } from 'mdb-react-ui-kit';
-function PostDtails({onePost}){
-
+function PostDtails(){
+  const location = useLocation();
+  const onePost = location.state.data;
 return (
 <div  >
     
