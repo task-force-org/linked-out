@@ -7,7 +7,7 @@ import Card from 'react-bootstrap/Card';
 
 
 
-function OnePost({e}){
+function OnePost({e,changeState}){
     return (
         <div className="card">
             
@@ -24,7 +24,7 @@ function OnePost({e}){
             <Card.Text>
               {e.post_description}
             </Card.Text>
-            <Button variant="primary">Check details</Button>
+            <Button onClick={(event)=>changeState(e)} variant="primary">Check details</Button>
           </Card.Body>
         </Card>
         </div>

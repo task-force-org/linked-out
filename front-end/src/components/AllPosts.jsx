@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import axios from "axios"
 import OnePost from "./OnePost";
 
-function AllPosts (){
+function AllPosts ({changeState}){
 const [data,setData]=useState([])
     
 const getData=()=>{
@@ -20,7 +20,7 @@ return (
 {
 data.map((e)=>{
     
-return <OnePost e={e}/>
+return <OnePost changeState={changeState} e={e}/>
 })
 
 }
