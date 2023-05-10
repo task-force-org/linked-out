@@ -1,0 +1,68 @@
+.sidebar {
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  height: 100%;
+}
+
+.sidebar__profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sidebar__profile img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.sidebar__links a {
+  display: block;
+  margin-bottom: 10px;
+  color: #555;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.sidebar__links a:hover {
+  color: #0073b1;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0077b5;
+  color: white;
+  padding: 1rem;
+}
+
+.navbar__logo img {
+  height: 3rem;
+  
+}
+
+.navbar__links a {
+  color: white;
+  margin-right: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.navbar__search input[type="text"] {
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  width: 20rem;
+  margin-right: 1rem;
+}
+
+.navbar__search input[type="text"]::placeholder {
+  color: white;
+}
+.logo{
+  display: flex;
+  background-size:55ch;
+}
