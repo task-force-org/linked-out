@@ -27,7 +27,7 @@ const EditProfile = (props) => {
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formFullName">
           <Form.Label>Full Name</Form.Label>
-          <Form.Control
+          <Form.Control 
             type="text"
             placeholder="Enter your full name"
             value={fullName}

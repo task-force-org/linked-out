@@ -1,29 +1,18 @@
-import React,{useEffect,useState} from "react";
-import './App.css';
-import AllPosts from "./components/AllPosts"
-import PostDtails from "./components/PostDetails";
-function App() {
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
+import LoginCom from "./components/LoginCom";
+import LoginIndiv from "./components/LoginIndiv";
 
-  const [onePost,setOnePost]=useState({})
-  const [view, setView]=useState('AllPosts')
-  const changeState=(state)=>{
-    setOnePost(state)
-    setView("PostDtails")
-  }
-  if(view==='AllPosts'){
-    return (
-      <div className="App">
-       <AllPosts changeState={changeState}/>
-      </div>
-    );
-  } else if(view==="PostDtails"){
-    return (
-      <div className="App">
-       <PostDtails onePost={onePost}/>
-      </div>
-    );
-  }
-  
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/individual" element={<LoginIndiv />} />
+        <Route path="/company" element={<LoginCom />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
