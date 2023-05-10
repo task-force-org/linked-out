@@ -5,11 +5,8 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
 -- -----------------------------------------------------
-
 -- -----------------------------------------------------
--- Schema mydb
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
 USE `mydb` ;
@@ -17,16 +14,16 @@ USE `mydb` ;
 -- -----------------------------------------------------
 -- Table `mydb`.`company`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`company` (
-  `idcompany` INT NOT NULL AUTO_INCREMENT,
-  `company_name` VARCHAR(45) NOT NULL,
-  `description` TEXT NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idcompany`))
-ENGINE = InnoDB;
+  CREATE TABLE IF NOT EXISTS `mydb`.`company` (
+    `idcompany` INT NOT NULL AUTO_INCREMENT,
+    `company_name` VARCHAR(45) NOT NULL,
+    `description` TEXT NOT NULL,
+    `email` VARCHAR(45) NOT NULL,
+    `password` VARCHAR(45) NOT NULL,
+    PRIMARY KEY (`idcompany`))
+  ENGINE = InnoDB;
 
-
+  
 -- -----------------------------------------------------
 -- Table `mydb`.`posts-company`
 -- -----------------------------------------------------
