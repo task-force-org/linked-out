@@ -6,6 +6,7 @@ const AddPost = ({ changeView }) => {
   const [post_img, setPost_img] = useState('');
   const [post_title, setPost_title] = useState('');
   const [post_description , setPost_description ] = useState('');
+  
 
   const handleAddPost = () => {
     axios
