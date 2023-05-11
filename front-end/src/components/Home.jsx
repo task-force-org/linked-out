@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
-import "../css/App.css";
+import { useNavigate, useLocation } from "react-router-dom";
+
 function Home() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      require("../css/App.css");
+    }
+  }, [location.pathname]);
+
   return (
     <div className="home">
       <Navbar />
