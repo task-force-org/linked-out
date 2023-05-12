@@ -1,8 +1,18 @@
 import React,{useEffect,useState} from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios"
 import OnePost from "./OnePost";
+import Navbar from "./Navbar"
+import Footer from "../components/Footer";
+function AllPosts ({changeState}){
 
-function AllPosts (){
+    const location = useLocation();
+    useEffect(() => {
+      if (location.pathname === "/companyPosts") {
+        require("../css/App.css");
+      }
+    }, [location.pathname]);
+
 const [data,setData]=useState([])
     
 const getData=()=>{
@@ -16,15 +26,23 @@ useEffect(()=>{
 
 getData()
 return (
+    
 <div>
+<Navbar/>
+
 {
 data.map((e)=>{
     
-return <OnePost e={e}/>
+return (
+    <div className="all">
+    
+<OnePost changeState={changeState} e={e}/>
+    </div>
+)
 })
 
 }
-
+<Footer/>
 </div>
 )
 
