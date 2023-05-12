@@ -1,114 +1,125 @@
 import React, { useState, useEffect } from "react";
-
 import $ from "jquery";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import "../css/login.css";
-const API = "http://localhost:5000/individual";
+const API = "http://localhost:5000/company";
+//login as a company
 
 function LoginCom() {
+  const location = useLocation();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [bio, setBio] = useState("");
-  const [experiences, setExperiences] = useState("");
-  const [education, setEducation] = useState("");
   const [profile_pic, setProfilePic] = useState("");
   const [view, setView] = useState("signup");
-
-  const user = {
-    full_name: username,
-    email: email,
-    password: password,
-    bio: bio,
-    experiences: experiences,
-    education: education,
-    profile_pic: profile_pic,
+  const [data, setData] = useState([]);
+  //change the format of the picture
+  const handlePic = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      console.log(reader.result);
+      setProfilePic(reader.result);
+    };
   };
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    axios
-      .get(`http://localhost:5000/individual/get/${username}`)
-      .then((res) => {
-        const user = res.data;
-        user.map((e) => {
-          console.log(e.username, e.userpassword, username, password);
-          if (e.username === username && e.userpassword === password) {
-            console.log("Login successful");
-            setView("profile"); // Change view to profile after login
-          } else {
-            console.log("Wrong password");
-          }
-        });
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (email === "" || username === "" || password === "") {
-      alert("Please fill all the fields!");
-    } else {
-      setView("profile"); // Change view to profile after signup
+  //conditional css
+  useEffect(() => {
+    if (location.pathname === "/company") {
+      require("../css/login.css");
     }
-  };
-
-  const handleCreateProfile = (e) => {
-    e.preventDefault();
-    axios
-      .post(API, user)
-      .then((res) => console.log(res.data).catch((err) => console.log(err)));
-    console.log(user);
-    navigate("/");
-  };
+  }, [location.pathname]);
+  // the functionn that handle change in login
   useEffect(() => {
     const signUpButton = $("#signUp");
     const signInButton = $("#signIn");
     const container = $("#container");
-
     signUpButton.on("click", () => {
       container.addClass("right-panel-active");
     });
-
     signInButton.on("click", () => {
       container.removeClass("right-panel-active");
     });
-
     return () => {
-      // Clean up event listeners when the component unmounts
       signUpButton.off("click");
       signInButton.off("click");
     };
-  }, []); //
-
+  }, []); 
+  //login functionality
+  const handleLogin = (e) => {
+    e.preventDefault();
+    axios
+      .post(`http://localhost:5000/company/authenticate`, {
+        email: email,
+        password: password,
+      })
+      .then((res) => {
+        const token = res.data.token;
+        console.log("Login successful");
+        //here set the view or the path you want
+        localStorage.setItem("token", token);
+        axios
+          .get(`http://localhost:5000/company/email/${email}`)
+          .then((res) => setData(res.data));
+      })
+      .catch((err) => console.log(err));
+  };
+  //signup functionality
+  const handleSubmit = (e) => {//checking then complete the signup
+    e.preventDefault();
+    if (email === "" || username === "" || password === "") {
+      alert("Please fill all the fields!");
+    } else {
+      setView("profile");
+    }
+  };
+  //set the profile after signing
+  const handleCreateProfile = async (e) => {
+    e.preventDefault();
+    const user = {
+      company_name: username,
+      description: bio,
+      email: email,
+      password: password,
+      img: profile_pic,
+    };
+    try {
+      const response = await axios.post(API, user);
+      console.log(response.data);
+      navigate("/"); //change this to handle the navigation where you want
+    } catch (err) {
+      console.log(err);
+    }
+  };
+//XML
   return (
     <div className="form-structor">
       <h1></h1>
       {view === "signup" && (
         <div className="signup">
-          <h2>Weekly Coding Challenge #1: Sign in/up Form</h2>
-          <div class="container" id="container">
-            <div class="form-container sign-up-container">
+          <h2>Always make the oportunity for others.</h2>
+          <div className="container" id="container">
+            <div className="form-container sign-up-container">
               <form action="#">
                 <h1>Create Account</h1>
-                <div class="social-container">
-                  <a href="#" class="social">
-                    <i class="fab fa-facebook-f"></i>
+                <div className="social-container">
+                  <a href="#" className="social">
+                    <i className="fab fa-facebook-f"></i>
                   </a>
-                  <a href="#" class="social">
-                    <i class="fab fa-google-plus-g"></i>
+                  <a href="#" className="social">
+                    <i className="fab fa-google-plus-g"></i>
                   </a>
-                  <a href="#" class="social">
-                    <i class="fab fa-linkedin-in"></i>
+                  <a href="#" className="social">
+                    <i className="fab fa-linkedin-in"></i>
                   </a>
                 </div>
                 <span>or use your email for registration</span>
                 <input
                   type="text"
                   placeholder="Name"
-                  class="input"
+                  className="input"
                   id="signup-name"
                   required
                   onChange={(e) => setUsername(e.target.value)}
@@ -116,7 +127,7 @@ function LoginCom() {
                 <input
                   type="email"
                   placeholder="Email"
-                  class="input"
+                  className="input"
                   id="signup-email"
                   required
                   onChange={(e) => setEmail(e.target.value)}
@@ -124,13 +135,13 @@ function LoginCom() {
                 <input
                   type="password"
                   placeholder="Password"
-                  class="input"
+                  className="input"
                   id="signup-password"
                   required
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <button
-                  class="submit-btn"
+                  className="submit-btn"
                   id="signup-btn"
                   onClick={handleSubmit}
                 >
@@ -138,25 +149,25 @@ function LoginCom() {
                 </button>
               </form>
             </div>
-            <div class="form-container sign-in-container">
+            <div className="form-container sign-in-container">
               <form action="#">
-                <h1>Sign in</h1>
-                <div class="social-container">
-                  <a href="#" class="social">
-                    <i class="fab fa-facebook-f"></i>
+                <h1>Log in</h1>
+                <div className="social-container">
+                  <a href="#" className="social">
+                    <i className="fab fa-facebook-f"></i>
                   </a>
-                  <a href="#" class="social">
-                    <i class="fab fa-google-plus-g"></i>
+                  <a href="#" className="social">
+                    <i className="fab fa-google-plus-g"></i>
                   </a>
-                  <a href="#" class="social">
-                    <i class="fab fa-linkedin-in"></i>
+                  <a href="#" className="social">
+                    <i className="fab fa-linkedin-in"></i>
                   </a>
                 </div>
                 <span>or use your account</span>
                 <input
                   type="email"
                   placeholder="Email"
-                  class="input"
+                  className="input"
                   id="login-email"
                   required
                   onChange={(e) => setEmail(e.target.value)}
@@ -164,35 +175,39 @@ function LoginCom() {
                 <input
                   type="password"
                   placeholder="Password"
-                  class="input"
+                  className="input"
                   id="login-password"
                   required
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <a href="#" class="forgot-password">
+                <a href="#" className="forgot-password">
                   Forgot your password?
                 </a>
-                <button class="submit-btn" id="login-btn">
-                  Sign In
+                <button
+                  className="submit-btn"
+                  id="login-btn"
+                  onClick={handleLogin}
+                >
+                  Log In
                 </button>
               </form>
             </div>
-            <div class="overlay-container">
-              <div class="overlay">
-                <div class="overlay-panel overlay-left">
+            <div className="overlay-container">
+              <div className="overlay">
+                <div className="overlay-panel overlay-left">
                   <h1>Welcome Back!</h1>
                   <p>
                     To keep connected with us please login with your personal
                     info
                   </p>
-                  <button class="ghost" id="signIn">
-                    Sign In
+                  <button className="ghost" id="signIn">
+                    Log In
                   </button>
                 </div>
-                <div class="overlay-panel overlay-right">
-                  <h1>Hello, Friend!</h1>
+                <div className="overlay-panel overlay-right">
+                  <h1>Hello, Boss!</h1>
                   <p>Enter your personal details and start journey with us</p>
-                  <button class="ghost" id="signUp">
+                  <button className="ghost" id="signUp">
                     Sign Up
                   </button>
                 </div>
@@ -202,7 +217,7 @@ function LoginCom() {
 
           <footer>
             <p>
-              Created with <i class="fa fa-heart"></i> by
+              Created with <i className="fa fa-heart"></i> by
               <a target="_blank" href="https://florin-pop.com">
                 Florin Pop
               </a>
@@ -222,7 +237,7 @@ function LoginCom() {
         <div className="profile slide-up">
           <div className="center">
             <h2 className="form-title" id="login">
-              <span>or</span>Create Profile
+              <span>and</span>Create Profile
             </h2>
             <div className="form-holder">
               <input
@@ -232,22 +247,13 @@ function LoginCom() {
                 onChange={(e) => setBio(e.target.value)}
               />
               <input
-                type="text"
-                className="input"
-                placeholder="Experiences"
-                onChange={(e) => setExperiences(e.target.value)}
-              />
-              <input
-                type="text"
-                className="input"
-                placeholder="Education"
-                onChange={(e) => setEducation(e.target.value)}
-              />
-              <input
                 type="file"
+                accept="image/*"
                 className="input"
                 placeholder="Profile Picture"
-                onChange={(e) => setProfilePic(e.target.value)}
+                onChange={(e) => {
+                  handlePic(e);
+                }}
               />
             </div>
             <button className="submit-btn" onClick={handleCreateProfile}>
