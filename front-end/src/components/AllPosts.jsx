@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios"
 import OnePost from "./OnePost";
 import Navbar from "./Navbar"
-
+import Footer from "../components/Footer";
 function AllPosts ({changeState}){
 
     const location = useLocation();
@@ -26,8 +26,9 @@ useEffect(()=>{
 
 getData()
 return (
+    
 <div>
-   
+<Navbar/>
 
 {
 data.map((e)=>{
@@ -41,7 +42,7 @@ return (
 })
 
 }
-
+<Footer/>
 </div>
 )
 

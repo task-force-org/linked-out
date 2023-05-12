@@ -16,8 +16,8 @@ function OnePost({e}){
             
             <Card style={{ width: '40rem' }}>
            
-      <Card.Body>{e.company_name}</Card.Body>
-      <img  className="img" src={e.img} />
+      <Card.Body onClick={()=>navigate("/companyDetails", { state: { id: e.idcompany } }) } >{e.company_name}</Card.Body>
+      <img onClick={()=>navigate("/companyDetails", { state: { id: e.idcompany } }) }  className="img" src={e.img} />
       <p>{e.post_date}</p> 
     </Card>
         <Card style={{ width: '40rem' }}>
@@ -27,7 +27,7 @@ function OnePost({e}){
             <Card.Text>
               {e.post_description}
             </Card.Text>
-            <Button onClick={(event)=>navigate("/PostDtails", { state: { data: e } }) } variant="primary">Check details</Button>
+            <Button onClick={()=>navigate("/PostDtails", { state: { data: e } }) } variant="primary">Check details</Button>
           </Card.Body>
         </Card>
         </div>
