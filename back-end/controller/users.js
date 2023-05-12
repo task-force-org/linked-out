@@ -1,79 +1,88 @@
-const cloudinary = require("../utils/cloudinary")
-const { getAll, getOne, addOne, updateOne, deleteOne } = require('../database/modules/users');
 
-module.exports = {
-    getAllIndividuals: function (req, res) {
-        getAll(function (err, results) {
-            if (err) console.log(err);
-            else res.json(results);
-        });
-    },
+const userModel = require('../database/modules/users')
 
-    getIndividualById: function (req, res) {
-        const id = req.params.id;
-        getOne(id, function (err, result) {
-            if (err) console.log(err);
-            else res.json(result);
-        });
-    },
+exports.getAllUsers =  (req, res)=> {
+  userModel.getAll((err, result)=> {
+    if (err) {
+      console.error(err)
+      res.status(500).send('error')
+    } else {
+      res.json(result)
+    }
+  })
+}
 
-    addIndividual: function (req, res) {
-        const data = req.body;
-        const file = req.file;
+exports.getOneUser = (req, res)=> {
+  const id = req.params.id
+  userModel.getOne(id, (err, result)=> {
+    if (err) {
+      console.error(err)
+      res.status(500).send(`no id detected`)
+    } else {
+      res.json(result)
+    }
+  })
+}
+exports.getFrom=(req,res)=>{
+    const email = req.params.email
+    userModel.getData(email, (err, result)=> {
+      if (err) {
+        console.log(err)
+        res.status(500).json("none with this email")
+      } else {
+        res.status(200).json(result[0])
+      }
+    })
+  }
 
-        cloudinary.uploader.upload(file.path, function (err, result) {
-            if (err) console.log(err);
-            else {
-                data.profile_pic = result.secure_url;
-                addOne(data, function (err, result) {
-                    if (err) console.log(err);
-                    else res.json(result);
-                });
-            }
-        });
-    },
 
-    updateIndividual: function (req, res) {
-        const id = req.params.id;
-        const data = req.body;
-        const file = req.file;
+exports.addOneUser = (req, res)=> {
+  const data = req.body
+  userModel.addOne(data,(err, result)=> {
+    if (err) {
+      console.error(err)
+      res.status(500).send('An error occurred while adding user')
+    } else {
+      res.json(result)
+    }
+  })
+}
 
-        if (file) {
-            cloudinary.uploader.upload(file.path, function (err, result) {
-                if (err) console.log(err);
-                else {
-                    data.profile_pic = result.secure_url;
-                    updateOne(id, data, function (err, result) {
-                        if (err) console.log(err);
-                        else res.json(result);
-                    });
-                }
-            });
-        } else {
-            updateOne(id, data, function (err, result) {
-                if (err) console.log(err);
-                else res.json(result);
-            });
-        }
-    },
+exports.updateOneUser =(req, res)=> {
+  const id = req.params.id
+  const data = req.body
+  userModel.updateOne(id, data, (err, result)=> {
+    if (err) {
+      console.error(err)
+      res.status(500).send(`no id detected`)
+    } else {
+      res.json(result)
+    }
+  })
+}
 
-    deleteIndividual: function (req, res) {
-        const id = req.params.id;
-        getOne(id, function (err, result) {
-            if (err) console.log(err);
-            else {
-                const profilePicUrl = result.profile_pic;
-                const publicId = profilePicUrl.split('/').pop().split('.')[0];
-                cloudinary.uploader.destroy(publicId, function (err, result) {
-                    if (err) console.log(err);
-                    else {
-                        deleteOne(id, function (err, result) {
-                            if (err) console.log(err);
-                            else res.json(result);
-                        });
-                    }
-                });
-            }
-        });
-    },
-};
+exports.deleteOneUser = (req, res)=> {
+  const id = req.params.id
+  userModel.deleteOne(id, (err, result)=> {
+    if (err) {
+      console.error(err)
+      res.status(500).send(`no id detected`)
+    } else {
+      res.json(result)
+    }
+  })
+}
+
+
+exports.authenticateUser = function (req, res) {
+  const email = req.body.email
+  const password = req.body.password
+  userModel.authenticate(email, password, function (err, result) {
+    if (err) {
+      console.error(err)
+      res.status(401).send('Authentication failed')
+    } else {
+      res.json(result)
+    }
+  })
+}

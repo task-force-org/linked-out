@@ -4,11 +4,13 @@ var indiv = require('../controller/users');
 
 
 //for individual
-router.get('/get', indiv.getAllIndividuals);
-router.get('/get/:id', indiv.getIndividualById);
-router.post('/', indiv.addIndividual);
-router.put('/:id', indiv.updateIndividual);
-router.delete('/:id', indiv.deleteIndividual);
+router.get('/get', indiv.getAllUsers);
+router.get('/get/:id', indiv.getOneUser);
+router.get('/email/:email', indiv.getFrom);
+router.post('/', indiv.addOneUser);
+router.post("/authenticate",indiv.authenticateUser)
+router.put('/:id', indiv.updateOneUser);
+router.delete('/:id', indiv.deleteOneUser);
 
 
 
