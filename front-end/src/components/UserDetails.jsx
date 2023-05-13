@@ -15,7 +15,7 @@ import {
     MDBRow,
     MDBCol
   } from 'mdb-react-ui-kit';
-  import Footer from "../components/Footer";
+ 
 import Navbar from "../components/Navbar";
 
 

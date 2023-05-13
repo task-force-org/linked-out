@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import CompanyDetails from "./components/CompanyDetails";
 import AddPost from "./components/AddPost";
+import SeeAppliers from "./components/SeeAppliers"
 function App() {
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
         <Route path="/companyDetails" element={<CompanyDetails />} />
         <Route path="/userProfile" element={<UserDetails />} />
         <Route path="/addpost" element={<AddPost />} />
+        <Route path="/SeeAppliers" element={<SeeAppliers />} />
       </Routes>
     </BrowserRouter>
  

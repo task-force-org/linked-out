@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.css";
 import "../css/CDetails.css"
 import Button from 'react-bootstrap/Button';
-
+import EditProfileCompany from "./EditProfileCompany";
 import {
     MDBCard,
     MDBCardImage,
@@ -110,7 +110,9 @@ function CompanyDetails() {
      
       <h1>{data.description}</h1>
       <h1>{data.email}</h1>
-     
+      {!isEditing && <Button variant="primary" onClick={handleEditProfile}>Edit Profile</Button>}
+        {isEditing && <EditProfileCompany data={[data]} onSave={handleSaveProfile} />}
+{<Button variant="primary" onClick={()=>navigate("/addpost",{ state: { id: id } })}>add post</Button>}
 
       {posts.map((post) => {
 
@@ -131,9 +133,7 @@ const postDtails={
 
         return (
           <>
-            {!isEditing && <Button variant="primary" onClick={handleEditProfile}>Edit Profile</Button>}
-        {isEditing && <EditProfile data={data} onSave={handleSaveProfile} />}
-{<Button variant="primary" onClick={()=>navigate("/addpost",{ state: { id: id } })}>add post</Button>}
+           
           <MDBRow className="row-cols-1 row-cols-md-2 g-4">
           <MDBCol>
             {}
@@ -144,8 +144,8 @@ const postDtails={
               <MDBCardBody>
                 <MDBCardTitle>{post.post_title}</MDBCardTitle>
                 <MDBCardText>{post.post_description}</MDBCardText>
-              </MDBCardBody>
-            </MDBCard>
+              </MDBCardBody> 
+              </MDBCard><Button variant="primary" onClick={(event)=>navigate("/SeeAppliers", { state: { id: post["idposts-company"] } })}>see appliers</Button>
           </MDBCol> <Button variant="primary" onClick={(event)=>handleDeletePost(event,post["idposts-users"])}>delete post</Button>
         </MDBRow>
         </>

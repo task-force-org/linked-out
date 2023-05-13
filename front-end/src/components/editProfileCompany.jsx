@@ -1,53 +1,50 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
-const EditProfile = (props) => {
-  const [fullName, setFullName] = useState("");
+const EditProfileCompany = (props) => {
+  const [company_name, setCompany_name] = useState("");
   const [email, setEmail] = useState("");
-  const [bio, setBio] = useState("");
-  const [experiences, setExperiences] = useState("");
-  const [education, setEducation] = useState("");
-
+console.log(props.data)
+  const [description, setDescription] = useState("");
 
   const updatedUser = {
-      
-    full_name: fullName,
+    company_name: company_name,
     email: email,
-   description
+    description: description,
   };
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+
     props.onSave(updatedUser);
-    patchData()
-    window.location.reload()
+    patchData();
+    window.location.reload();
   };
 
-const patchData=()=>{
-  axios
-  
-      .put(`http://localhost:5000/individual/${props.data[0].userID}`, updatedUser)
+  const patchData = () => {
+    axios
+
+      .put(
+        `http://localhost:5000/company/${props.data[0].idcompany}`,
+        updatedUser
+      )
       .then((res) => {
-      console.log(res);
+        console.log(res);
       })
       .catch((err) => console.error(err));
-}
+  };
 
   return (
-    
     <div className="edit-profile">
       {console.log(props.data)}
-      <h2>Edit Profile</h2>
+      <h2>Edit Profile company</h2>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formFullName">
-          <Form.Label>Name</Form.Label>
-          <Form.Control 
+          <Form.Label>company_name</Form.Label>
+          <Form.Control
             type="text"
-      
-            defaultValue={props.data[0].full_name}  
-            onChange={(e) => setFullName(e.target.value)}
+            defaultValue={props.data[0].company_name}
+            onChange={(e) => setCompany_name(e.target.value)}
           />
         </Form.Group>
 
@@ -55,26 +52,25 @@ const patchData=()=>{
           <Form.Label>Email</Form.Label>
           <Form.Control
             type="email"
-            defaultValue={props.data[0].email}  
+            defaultValue={props.data[0].email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
 
-
-        <Form.Group controlId="formEmail">
+        <Form.Group controlId="formDescription">
           <Form.Label>description</Form.Label>
           <Form.Control
-            type="email"
-            defaultValue={props.data[0].email}  
-            onChange={(e) => setEmail(e.target.value)}
+            type="description"
+            defaultValue={props.data[0].description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </Form.Group>
 
-      
-
-       
-
-        <Button  onClick={(event)=>handleSubmit(event)} variant="primary" type="submit">
+        <Button
+          onClick={(event) => handleSubmit(event)}
+          variant="primary"
+          type="submit"
+        >
           Save Changes
         </Button>
       </Form>
@@ -82,4 +78,4 @@ const patchData=()=>{
   );
 };
 
-export default EditProfile;
+export default EditProfileCompany;
