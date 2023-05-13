@@ -12,6 +12,7 @@ import CompanyDetails from "./components/CompanyDetails";
 import AddPost from "./components/AddPost";
 import SeeAppliers from "./components/SeeAppliers"
 import AddPostCompany from "./components/AddPostCompany";
+
 function App() {
   return (
     <>

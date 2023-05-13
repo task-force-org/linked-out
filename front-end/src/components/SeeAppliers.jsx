@@ -21,11 +21,27 @@ import Navbar from "./Navbar";
 
 function SeeAppliers(){
   const location = useLocation();
-  const onePost = location.state.id;
+  const id = location.state.id;
 
-    const [data,setData]=useState({})
+    const [data,setData]=useState(null)
 
-   
+   const getAppliers=()=>{
+    axios.get(`http://localhost:5000/app/applications/${id}`)
+    .then((res)=>{
+      console.log(res.data)
+setData(res.data)
+    })
+    .catch((err)=>console.log(id,'ID'))
+   }
+   useEffect(()=>{
+    getAppliers()
+   },[])
+   if(data===null){
+    console.log(data,'data')
+    return(
+      <h1>no appliers for the time being</h1>
+    )
+   }
     
 }
 

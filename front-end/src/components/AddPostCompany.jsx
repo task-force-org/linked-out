@@ -37,7 +37,7 @@ const AddPostCompany = () => {
         posts_details: posts_details
       })
       .then(() => {
-        navigate("/companyDetails");
+        navigate("/companyDetails",);
        
       })
       .catch((err) => {

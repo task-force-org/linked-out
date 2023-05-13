@@ -27,9 +27,9 @@ function CompanyDetails() {
   const [posts, setPosts] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const location = useLocation();
-  const id = location.state.data.idcompany;
+  var id = location.state.data.idcompany||location.state.id;//this condition need to be checked 
 
-
+console.log(id,"data")
 
   const handleDeletePost = (event, postID) => {
     console.log(postID)
@@ -147,7 +147,7 @@ const postDtails={
               </MDBCardBody> 
               </MDBCard><Button variant="primary" onClick={(event)=>navigate("/SeeAppliers", { state: { id: post["idposts-company"] } })}>see appliers</Button>
           </MDBCol> <Button variant="primary" onClick={(event)=>handleDeletePost(event,post["idposts-company"])}>delete post</Button>
-        </MDBRow>
+        </MDBRow> <Button variant="primary" onClick={()=>navigate("/SeeAppliers",{ state: { id:post["idposts-company"] } })}>add post</Button>
         </>
         )
       }
