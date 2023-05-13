@@ -24,7 +24,7 @@ module.exports={
         const post = req.body;
         addone(post, function(err, result) {
           if (err) {
-            console.log(post);
+            console.log(err);
             res.sendStatus(500);
           } else {
 

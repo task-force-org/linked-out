@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar";
 import CompanyDetails from "./components/CompanyDetails";
 import AddPost from "./components/AddPost";
 import SeeAppliers from "./components/SeeAppliers"
+import AddPostCompany from "./components/AddPostCompany";
 function App() {
   return (
     <>
@@ -28,6 +29,7 @@ function App() {
         <Route path="/userProfile" element={<UserDetails />} />
         <Route path="/addpost" element={<AddPost />} />
         <Route path="/SeeAppliers" element={<SeeAppliers />} />
+        <Route path="/addpostCompony" element={<AddPostCompany />} />
       </Routes>
     </BrowserRouter>
  

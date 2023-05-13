@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.css";
 import "../css/CDetails.css"
 import Button from 'react-bootstrap/Button';
-import EditProfileCompany from "./EditProfileCompany";
+
 import {
     MDBCard,
     MDBCardImage,
@@ -17,7 +17,7 @@ import {
   } from 'mdb-react-ui-kit';
   import Footer from "./Footer";
 import Navbar from "./Navbar";
-
+import EditProfileCompany from "./EditProfileCompany"
 
 
 
@@ -33,7 +33,7 @@ function CompanyDetails() {
 
   const handleDeletePost = (event, postID) => {
     console.log(postID)
-    const url = `http://localhost:5000/company/posts/${postID}`;
+    const url = `http://localhost:5000/company/post/${postID}`;
     axios
       .delete(url, {
         headers: {
@@ -85,9 +85,9 @@ function CompanyDetails() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/posts/companies/${id}`)
+      .get(`http://localhost:5000/company/post/${id}`)
       .then(({ data }) => setPosts(data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(id));
       console.log(id)
   }, [id]);
 
@@ -112,7 +112,7 @@ function CompanyDetails() {
       <h1>{data.email}</h1>
       {!isEditing && <Button variant="primary" onClick={handleEditProfile}>Edit Profile</Button>}
         {isEditing && <EditProfileCompany data={[data]} onSave={handleSaveProfile} />}
-{<Button variant="primary" onClick={()=>navigate("/addpost",{ state: { id: id } })}>add post</Button>}
+{<Button variant="primary" onClick={()=>navigate("/addpostCompony",{ state: { id: id } })}>add post</Button>}
 
       {posts.map((post) => {
 
@@ -146,7 +146,7 @@ const postDtails={
                 <MDBCardText>{post.post_description}</MDBCardText>
               </MDBCardBody> 
               </MDBCard><Button variant="primary" onClick={(event)=>navigate("/SeeAppliers", { state: { id: post["idposts-company"] } })}>see appliers</Button>
-          </MDBCol> <Button variant="primary" onClick={(event)=>handleDeletePost(event,post["idposts-users"])}>delete post</Button>
+          </MDBCol> <Button variant="primary" onClick={(event)=>handleDeletePost(event,post["idposts-company"])}>delete post</Button>
         </MDBRow>
         </>
         )

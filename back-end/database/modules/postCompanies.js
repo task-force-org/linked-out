@@ -1,5 +1,5 @@
 const conn=require("../index")
-
+const cloudinary = require("../../utils/cloudinary")
 
 
 // "select p.post_title, p.post_aplliers,p.posts_details, p.post_img, p.post_description, p. post_date, c.company_name, c.img, c.idcompany from `posts-company` p left join company c on c.idcompany=`idposts-company`"
