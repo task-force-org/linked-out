@@ -4,6 +4,8 @@ import { useLocation } from "react-router-dom";
 import {useNavigate} from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.css";
 import "../css/CDetails.css"
+import Button from 'react-bootstrap/Button';
+
 import {
     MDBCard,
     MDBCardImage,
@@ -13,8 +15,8 @@ import {
     MDBRow,
     MDBCol
   } from 'mdb-react-ui-kit';
-  import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+  import Footer from "./Footer";
+import Navbar from "./Navbar";
 
 
 
@@ -23,8 +25,50 @@ function CompanyDetails() {
   const navigate=useNavigate()
   const [data, setData] = useState({});
   const [posts, setPosts] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
   const location = useLocation();
-  const id = location.state.id;
+  const id = location.state.data.idcompany;
+
+
+
+  const handleDeletePost = (event, postID) => {
+    console.log(postID)
+    const url = `http://localhost:5000/company/posts/${postID}`;
+    axios
+      .delete(url, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`, 
+        },
+      })
+      .then(() => {
+        console.log('Post deleted successfully');
+      })
+      .catch((err) => {
+        console.error('Error deleting post:', err);
+      });
+      window.location.reload()
+  };
+  
+
+  const handleEditProfile = () => {
+    setIsEditing(true);
+  };
+
+  const handleSaveProfile = (updatedProfile) => {
+    setIsEditing(false);
+    // Make a PUT request to update the profile in the backend
+    axios
+      .put(`http://localhost:5000/company/${data.id}`, updatedProfile)
+      .then(({ data }) => {
+        setData(data);
+      })
+      .catch((err) => console.error(err));
+  };
+
+
+
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,6 +88,7 @@ function CompanyDetails() {
       .get(`http://localhost:5000/posts/companies/${id}`)
       .then(({ data }) => setPosts(data))
       .catch((err) => console.log(err));
+      console.log(id)
   }, [id]);
 
   if (Object.keys(data).length === 0) {
@@ -85,8 +130,13 @@ const postDtails={
 
 
         return (
+          <>
+            {!isEditing && <Button variant="primary" onClick={handleEditProfile}>Edit Profile</Button>}
+        {isEditing && <EditProfile data={data} onSave={handleSaveProfile} />}
+{<Button variant="primary" onClick={()=>navigate("/addpost",{ state: { id: id } })}>add post</Button>}
           <MDBRow className="row-cols-1 row-cols-md-2 g-4">
           <MDBCol>
+            {}
             <MDBCard onClick={()=>{
               console.log(postDtails)
               navigate("/PostDtails", { state: { data: postDtails } })} }>
@@ -96,8 +146,9 @@ const postDtails={
                 <MDBCardText>{post.post_description}</MDBCardText>
               </MDBCardBody>
             </MDBCard>
-          </MDBCol>
+          </MDBCol> <Button variant="primary" onClick={(event)=>handleDeletePost(event,post["idposts-users"])}>delete post</Button>
         </MDBRow>
+        </>
         )
       }
         

@@ -13,9 +13,7 @@ const EditProfile = (props) => {
       
     full_name: fullName,
     email: email,
-    bio: bio,
-    experiences: experiences,
-    education: education,
+   description
   };
 
 
@@ -44,7 +42,7 @@ const patchData=()=>{
       <h2>Edit Profile</h2>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formFullName">
-          <Form.Label>Full Name</Form.Label>
+          <Form.Label>Name</Form.Label>
           <Form.Control 
             type="text"
       
@@ -62,34 +60,19 @@ const patchData=()=>{
           />
         </Form.Group>
 
-        <Form.Group controlId="formBio">
-          <Form.Label>Bio</Form.Label>
+
+        <Form.Group controlId="formEmail">
+          <Form.Label>description</Form.Label>
           <Form.Control
-            as="textarea"
-            rows={3}
-            placeholder="Tell us about yourself"
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
+            type="email"
+            defaultValue={props.data[0].email}  
+            onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
 
-        <Form.Group controlId="formExperiences">
-          <Form.Label>Experiences</Form.Label>
-          <Form.Control
-            type="text"
-            defaultValue={props.data[0].experiences}  
-            onChange={(e) => setExperiences(e.target.value)}
-          />
-        </Form.Group>
+      
 
-        <Form.Group controlId="formEducation">
-          <Form.Label>Education</Form.Label>
-          <Form.Control
-            type="text"
-            defaultValue={props.data[0].education}  
-            onChange={(e) => setEducation(e.target.value)}
-          />
-        </Form.Group>
+       
 
         <Button  onClick={(event)=>handleSubmit(event)} variant="primary" type="submit">
           Save Changes

@@ -1,4 +1,4 @@
-const {getAllPosts,getOneCompany}=require("../database/modules/postCompanies")
+const {getAllPosts,getOneCompany,addone,deletePost}=require("../database/modules/postCompanies")
 
 
 
@@ -19,5 +19,25 @@ module.exports={
             if(err) console.log(err)
             else res.json(result)
         })
-    }
+    },
+    addOnePost: function(req, res) {
+        const post = req.body;
+        addone(post, function(err, result) {
+          if (err) {
+            console.log(post);
+            res.sendStatus(500);
+          } else {
+
+            console.log(post);
+            res.json(result);
+          }
+        });
+      },
+      deleteOnePost:function(req,res){
+        const postID = req.params.postId;
+          deletePost(postID,function(err,result){
+              if(err) console.log(err)
+              else res.json(result)
+          })
+      }
 }

@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`individual` (
   `userID` INT NOT NULL AUTO_INCREMENT,
   `full_name` VARCHAR(60) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(text) NOT NULL,
   `bio` TEXT NOT NULL,
   `experiences` TEXT NOT NULL,
   `education` TEXT NOT NULL,

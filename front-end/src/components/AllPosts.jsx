@@ -14,14 +14,16 @@ function AllPosts ({changeState}){
     }, [location.pathname]);
 
 const [data,setData]=useState([])
+// const profile=location.state.data
     
 const getData=()=>{
-    axios.get("http://localhost:5000/posts/companies/all")
+    axios.get("http://localhost:5000/company/post/All")
     .then((res)=>setData(res.data))
     .catch((err)=>console.log(err))
 }
 useEffect(()=>{
     getData()
+  
 },[])
 
 getData()
@@ -42,7 +44,7 @@ return (
 })
 
 }
-<Footer/>
+{/* <Footer/> */}
 </div>
 )
 

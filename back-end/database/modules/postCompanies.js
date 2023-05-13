@@ -20,6 +20,30 @@ getOneCompany: function(id,Callback){
   })
 
 },
+addone : function(body, callback) {
+  cloudinary.uploader.upload(body.post_img, (err, result) => {
+      if (err) {
+        callback(err, null)
+      } else {
+          body.post_img = result.secure_url;
+        // Replace profile_pic URL with Cloudinary URL
+        const sql = 'INSERT INTO `posts-company`  SET ?'
+        conn.query(sql, body, (err, result) => {
+          callback(err, result)
+        })
+      }
+    })
+
+
+
+},
+deletePost: function(postID, callback) {
+  const sql = "DELETE FROM `posts-company` WHERE `idposts-company`="+`${postID}`;
+
+  conn.query(sql,  function(err, result) {
+    callback(err, result);
+  });
+}
 
 
   
