@@ -13,7 +13,7 @@ function Navbar() {
       <div className="navbar__logo">
         <img
           className="logo"
-          src="https://www.dallasdigitalmarketers.org/wp-content/uploads/2017/06/linkedoutlogo060717.jpg"
+          // src="https://o.remove.bg/downloads/611fc39d-cfa1-4fb9-910a-63fe4c96c63d/image-removebg-preview.png"
           alt="Logo"
         />
       </div>

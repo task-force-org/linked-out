@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from "react-router-dom";
 import moment from 'moment';
-const AddPost = () => {
+const AddPostCompany = () => {
   const [post_img, setPost_img] = useState('');
   const [post_title, setPost_title] = useState('');
   const [post_description , setPost_description ] = useState('');
-  const [post_details , setPost_details ] = useState('');
+  const [posts_details , setPost_details ] = useState('');
   const navigate=useNavigate()
   const location=useLocation()
   const id= location.state.id
@@ -27,27 +27,28 @@ const AddPost = () => {
     const userID =id;
 
     axios
-      .post(`http://localhost:5000/individual/posts/${id}`, { 
+      .post(`http://localhost:5000/company/post/${id}`, { 
         post_title: post_title,
         post_img: post_img,
         post_description: post_description,
         post_date: moment().format('MMMM Do YYYY, h:mm a'),
         post_aplliers: 0,
-        individual_userID: userID,
-        post_details: post_details
+        company_idcompany: userID,
+        posts_details: posts_details
       })
       .then(() => {
-        navigate("/userDetails");
-        window.location.reload();
+        navigate("/companyDetails",);
+       
       })
       .catch((err) => {
-        console.log(err);
+        console.log(id);
       });
+     
   };
 
   return (
     <>
-      <h1 className='add'>Add post</h1>
+      <h1 className='add'>Add post company</h1>
       <input type="text" placeholder='Enter the Post_title' onChange={(e) => setPost_title(e.target.value)} />
       <br />
       <input type="file" placeholder='Enter the post_img' onChange={(e) => handlePic(e)} />
@@ -63,4 +64,4 @@ const AddPost = () => {
   );
 };
 
-export default AddPost;
+export default AddPostCompany;

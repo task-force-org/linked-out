@@ -10,6 +10,7 @@ import Card from 'react-bootstrap/Card';
 
 
 function OnePost({e}){
+  console.log()
   const navigate=useNavigate()
     return (
         <div className="card">

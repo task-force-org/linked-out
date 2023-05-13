@@ -1,3 +1,4 @@
+
 const userModel = require('../database/modules/users')
 
 exports.getAllUsers =  (req, res)=> {
