@@ -46,7 +46,7 @@ function LoginCom() {
       signUpButton.off("click");
       signInButton.off("click");
     };
-  }, []); 
+  }, []);
   //login functionality
   const handleLogin = (e) => {
     e.preventDefault();
@@ -62,12 +62,23 @@ function LoginCom() {
         localStorage.setItem("token", token);
         axios
           .get(`http://localhost:5000/company/email/${email}`)
-          .then((res) => setData(res.data));
+          .then((res) => {
+            setData(res.data);
+
+            navigate("/companyDetails", { state: { data: res.data } });
+          });
       })
       .catch((err) => console.log(err));
   };
+
+  // const login= async()=>{
+  //   handleLogin()
+  //   navigate("/companyPosts",{state: {data:data}})
+  //   console.log(data)
+  // }
   //signup functionality
-  const handleSubmit = (e) => {//checking then complete the signup
+  const handleSubmit = (e) => {
+    //checking then complete the signup
     e.preventDefault();
     if (email === "" || username === "" || password === "") {
       alert("Please fill all the fields!");
@@ -93,7 +104,7 @@ function LoginCom() {
       console.log(err);
     }
   };
-//XML
+  //XML
   return (
     <div className="form-structor">
       <h1></h1>
@@ -186,7 +197,7 @@ function LoginCom() {
                 <button
                   className="submit-btn"
                   id="login-btn"
-                  onClick={handleLogin}
+                  onClick={(e) => handleLogin(e)}
                 >
                   Log In
                 </button>

@@ -15,7 +15,7 @@ function LoginIndiv() {
   const [profile_pic, setProfilePic] = useState("");
   const [data, setData] = useState("");
   const [view, setView] = useState("signup");
-//change the format of the picture
+  //change the format of the picture
   const handlePic = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -25,15 +25,15 @@ function LoginIndiv() {
       setProfilePic(reader.result);
     };
   };
-    //conditional css
-    const location = useLocation();
-    useEffect(() => {
-      if (location.pathname === "/indiv") {
-        require("../css/login.css");
-      }
-    }, [location.pathname]);
+  //conditional css
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === "/indiv") {
+      require("../css/login.css");
+    }
+  }, [location.pathname]);
 
-    //the functionalty of the signup effects
+  //the functionalty of the signup effects
   useEffect(() => {
     const signUpButton = $("#signUp");
     const signInButton = $("#signIn");
@@ -51,7 +51,7 @@ function LoginIndiv() {
       signInButton.off("click");
     };
   }, []); //
-//login funionality
+  //login funionality
   const handleLogin = (e) => {
     e.preventDefault();
     axios
@@ -67,11 +67,16 @@ function LoginIndiv() {
         //seting the data of the user
         axios
           .get(`http://localhost:5000/individual/email/${email}`)
-          .then((res) => setData(res.data));
+          .then((res) => {
+            setData(res.data);
+
+            navigate("/userProfile", { state: { data: res.data } });
+          });
       })
       .catch((err) => console.log(err));
   };
-//signing up and making a profile
+
+  //signing up and making a profile
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email === "" || username === "" || password === "") {

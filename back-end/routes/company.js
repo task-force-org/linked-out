@@ -10,5 +10,4 @@ router.post('/', company.addOne);
 router.post("/authenticate",company.authenticate)
 router.put('/:id', company.updateOne);
 router.delete('/:id', company.deleteOne);
-
 module.exports = router;
