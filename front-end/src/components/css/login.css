@@ -162,7 +162,9 @@ input {
 .overlay {
 	background: #FF416C;
 	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right,#006192, #006192);
+	/* background: linear-gradient(to right,#006192, #006192); */
+	background-image: url("https://www.pixel4k.com/wp-content/uploads/2021/05/abstract-waving-4k_1620165379.jpg");
+	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
 	color: #FFFFFF;
@@ -249,3 +251,4 @@ footer a {
     color: #3c97bf;
     text-decoration: none;
 }
+

@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import { useLocation } from 'react-router-dom'
-import "../onePost.css"
+// import "../onePost.css"
 import "bootstrap/dist/css/bootstrap.css";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';

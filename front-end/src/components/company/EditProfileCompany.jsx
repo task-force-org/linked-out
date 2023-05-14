@@ -4,9 +4,9 @@ import axios from "axios";
 const EditProfileCompany = (props) => {
   const [company_name, setCompany_name] = useState("");
   const [email, setEmail] = useState("");
-console.log(props.data)
+  console.log(props.data);
   const [description, setDescription] = useState("");
-
+  console.log(props.data);
   const updatedUser = {
     company_name: company_name,
     email: email,
@@ -24,10 +24,7 @@ console.log(props.data)
   const patchData = () => {
     axios
 
-      .put(
-        `http://localhost:5000/company/${props.data[0].idcompany}`,
-        updatedUser
-      )
+      .put(`http://localhost:5000/company/${props.data.idcompany}`, updatedUser)
       .then((res) => {
         console.log(res);
       })
@@ -36,14 +33,13 @@ console.log(props.data)
 
   return (
     <div className="edit-profile">
-      {console.log(props.data)}
       <h2>Edit Profile company</h2>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formFullName">
           <Form.Label>company_name</Form.Label>
           <Form.Control
             type="text"
-            defaultValue={props.data[0].company_name}
+            defaultValue={props.data.company_name}
             onChange={(e) => setCompany_name(e.target.value)}
           />
         </Form.Group>
@@ -52,7 +48,7 @@ console.log(props.data)
           <Form.Label>Email</Form.Label>
           <Form.Control
             type="email"
-            defaultValue={props.data[0].email}
+            defaultValue={props.data.email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
@@ -61,7 +57,7 @@ console.log(props.data)
           <Form.Label>description</Form.Label>
           <Form.Control
             type="description"
-            defaultValue={props.data[0].description}
+            defaultValue={props.data.description}
             onChange={(e) => setDescription(e.target.value)}
           />
         </Form.Group>

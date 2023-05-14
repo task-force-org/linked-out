@@ -1,0 +1,172 @@
+$bg: darken(white, 10%);
+$shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+$shadow1: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+body{
+  background-color: aquamarine;
+}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+img{
+  max-width:100%;
+}
+
+body{
+  background-color:$bg;
+  display:flex;
+  height:100vh;
+  width:100vw;
+  font-family:'Montserrat';
+}
+
+.container{
+  width:1600px;
+  max-width:100%;
+  margin:auto;
+}
+
+.display{ 
+  display:flex;
+  justify-content:space-around;
+  flex-wrap:wrap;
+  .display-item{
+    flex-grow:1;
+    flex-basis:1px;
+    display:flex;
+    justify-content:space-around;
+    padding:15px;
+    max-width:100%;
+  }
+}
+
+.card{
+  width:480px;
+  max-width:100%;
+  min-height:620px;
+  overflow:hidden;
+  border-radius:4px;
+  box-shadow:$shadow;
+  background-color:white;
+  position:relative;  
+  display: -webkit-box; 
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex; 
+  display: flex;
+  flex-direction:column;
+  .card-top{
+    -webkit-flex-basis:155px;
+    flex-basis:155px;
+    flex-shrink:1;
+    background-image: url("https://www.pixel4k.com/wp-content/uploads/2021/05/abstract-waving-4k_1620165379.jpg");
+    background-position: center center;
+    background-size:cover ;
+    -webkit-background-size:cover ;    
+    background-position:center;
+    background-size:cover;  
+  }
+  .card-profile{
+    flex-basis:75px;
+    flex-shrink:1;
+    .profile-image{
+      overflow:hidden;
+      border-radius:100%;
+      position:absolute;
+      left:calc(50% - 75px);
+      top:calc(25% - 75px);
+      border:4px solid white;
+      width:150px;
+      height:150px;     
+      background-size:cover;
+      background-position:center;
+    }
+  }
+  .card-info{
+    flex-basis:56,66665%;
+    flex-grow:1;
+    padding:0 15px;
+    text-align:center;
+    display: -webkit-box; 
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex; 
+    display: flex;
+    flex-direction:column;
+    .info-title{
+      padding-bottom:15px;
+      h3{
+        font-weight:400;
+      }
+    }
+    .info-follow{
+      display: -webkit-box; 
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex; 
+      display: flex;
+      padding:15px 0;
+      border-bottom:1px solid rgba(0,0,0,.3); 
+      font-size:1.2em;
+      >div{
+        flex-grow:1;
+        flex-basis:1px;
+        min-height:20px;
+      }
+    }
+    .info-bio{
+      padding:15px 0;
+    }
+    .info-social{
+      flex-grow:1;
+      padding:15px 0;
+      display: -webkit-box; 
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex; 
+      display: flex;
+      flex-direction:column;
+      justify-content:space-around;
+      .social-icons{
+        display: -webkit-box; 
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex; 
+        display: flex;
+        justify-content:space-around;
+        .sm{
+          flex-basis:40px;
+          height:40px;
+          transition:all .3s ease-in-out;
+          display: -webkit-box; 
+          display: -moz-box;
+          display: -ms-flexbox;
+          display: -webkit-flex; 
+          display: flex;
+          justify-content:space-around;
+          flex-direction:column;
+          text-align:center;
+          background-size:100% 200%;
+          background-position-y: 10%;
+          font-size:2em;
+          color:rgba(0,0,0,.8);
+          cursor:pointer;
+          &:hover{
+            background-position-y: 100%;
+            color:rgba(255,255,255,.8);
+            color:white;
+            border-radius:4px;
+          }
+        }
+       
+      }     
+    }
+  }
+}
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  justify-content: center;
+}
