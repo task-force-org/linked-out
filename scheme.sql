@@ -135,11 +135,16 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-ALTER TABLE `mydb`.`applied_users_tab`
-DROP FOREIGN KEY `fk_posts-company_has_individual_posts-company1`;
+INSERT INTO `company` (`company_name`, `description`, `email`, `password`, `img`) VALUES
+('ABC Company', 'We are a software development company based in California.', 'abc@example.com', 'password123', 'https://www.abcwebservice.com/wp-content/uploads/2018/04/Logo-2.jpg'),
+('XYZ Inc.', 'We provide IT consulting services for businesses.', 'xyz@example.com', 'password456', 'https://www.mmaglobal.com/files/styles/member_logo_large/public/logos/xyzcorporatepro.png?itok=ehOUsiQj'),
+('Acme Corporation', 'We manufacture and distribute products worldwide.', 'acme@example.com', 'password789', 'https://media.dayoftheshirt.com/images/shirts/YNEtF/teepublic_acme-corporation-alt-print-teepublic_1679596183.large.png'),
+('Global Enterprises', 'We offer logistics and supply chain management services.', 'global@example.com', 'password123', 'https://globalent.in/wp-content/uploads/2023/02/2-1.png'),
 
 ALTER TABLE `mydb`.`applied_users_tab`
 ADD CONSTRAINT `fk_posts-company_has_individual_posts-company1`
     FOREIGN KEY (`posts-company_idposts-company`, `posts-company_company_idcompany`)
     REFERENCES `posts-company` (`idposts-company`, `company_idcompany`)
     ON DELETE CASCADE;
+
+
