@@ -21,23 +21,29 @@ const AddPost = () => {
       setPost_img(reader.result);
     };
   };
+
+
+
+const Apost= { 
+  post_title: post_title,
+  post_img: post_img,
+  post_description: post_description,
+  post_date: moment().format('MMMM Do YYYY, h:mm a'),
+  post_aplliers: 0,
+  company_idcompany: id,
+  post_details: post_details
+}
+
   const handleAddPost = () => {
 
     // Replace USER_ID with the actual ID of the user creating the post
     const userID =id;
-
+console.log(Apost,"postD")
     axios
-      .post(`http://localhost:5000/individual/posts/${id}`, { 
-        post_title: post_title,
-        post_img: post_img,
-        post_description: post_description,
-        post_date: moment().format('MMMM Do YYYY, h:mm a'),
-        post_aplliers: 0,
-        individual_userID: userID,
-        post_details: post_details
-      })
+      .post(`http://localhost:5000/company/posts/${id}`,Apost)
       .then(() => {
-        navigate("/userDetails");
+        navigate("/userDetails")
+        
         window.location.reload();
       })
       .catch((err) => {

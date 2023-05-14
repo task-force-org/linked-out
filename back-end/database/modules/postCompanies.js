@@ -2,15 +2,14 @@ const conn=require("../index")
 const cloudinary = require("../../utils/cloudinary")
 
 
-// "select p.post_title, p.post_aplliers,p.posts_details, p.post_img, p.post_description, p. post_date, c.company_name, c.img, c.idcompany from `posts-company` p left join company c on c.idcompany=`idposts-company`"
-
+// "select p.`idposts-company`, p.post_title, p.post_aplliers,p.posts_details, p.post_img, p.post_description, p. post_date, c.company_name, c.img, c.idcompany from `posts-company` p left join company c on c.idcompany=`idposts-company`"
 module.exports={
   getAllPosts: function(Callback){
-    const sql= "select p.`idposts-company`, p.post_title, p.post_aplliers,p.posts_details, p.post_img, p.post_description, p. post_date, c.company_name, c.img, c.idcompany from `posts-company` p left join company c on c.idcompany=`idposts-company`"
+    const sql="SELECT  `idposts-company`,pc.post_title, pc.post_img, pc.post_description, pc.post_date, pc.post_aplliers,company_idcompany, c.company_name, c.description, c.email, c.img FROM `posts-company` pc JOIN `company` c ON pc.company_idcompany = c.idcompany"
     conn.query(sql,function(err, result){
       Callback(err,result)
     })
-
+    
 },
 getOneCompany: function(id,Callback){
 

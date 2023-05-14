@@ -4,9 +4,10 @@ import axios from "axios"
 import OnePost from "./OnePost";
 import Navbar from "./Navbar"
 import Footer from "../components/Footer";
-function AllPosts ({changeState}){
 
+function AllPosts ({changeState}){
     const location = useLocation();
+    const Uid= location.state.id
     useEffect(() => {
       if (location.pathname === "/companyPosts") {
         require("../css/App.css");
@@ -38,7 +39,7 @@ data.map((e)=>{
 return (
     <div className="all">
     
-<OnePost changeState={changeState} e={e}/>
+<OnePost Uid={Uid} changeState={changeState} e={e}/>
     </div>
 )
 })

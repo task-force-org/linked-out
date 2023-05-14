@@ -8,11 +8,11 @@ import UserDetails from "./components/UserDetails";
 import "./css/App.css"
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import CompanyDetails from "./components/CompanyDetails";
+import CompanyDetails from "./components/CompanyDetails"
 import AddPost from "./components/AddPost";
 import SeeAppliers from "./components/SeeAppliers"
 import AddPostCompany from "./components/AddPostCompany";
-
+import ProfileDetails from "./components/ProfileDetails";
 function App() {
   return (
     <>
@@ -31,6 +31,7 @@ function App() {
         <Route path="/addpost" element={<AddPost />} />
         <Route path="/SeeAppliers" element={<SeeAppliers />} />
         <Route path="/addpostCompony" element={<AddPostCompany />} />
+        <Route path="/ProfileDetails" element={<ProfileDetails />} />
       </Routes>
     </BrowserRouter>
  

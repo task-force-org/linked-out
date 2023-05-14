@@ -101,6 +101,7 @@ function UserDetails() {
     
     <div>
       {console.log(PathData)}
+      <Button variant="primary" onClick={()=>navigate("/companyPosts",{ state: { id: id } })}>view posts</Button>
       <Navbar/>
     <div>
   <div className="div">

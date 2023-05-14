@@ -9,15 +9,18 @@ function PostDtails(){
   const navigate=useNavigate()
   const location = useLocation();
   const onePost = location.state.data;
+  const cid=location.state
+  const Uid=location.state.Uid
 const [app,setApp]=useState([])
   const application={
   
     idposts:onePost["idposts-company"],
-    idcompany:onePost.idcompany,
-    userID:7
+    idcompany:onePost["company_idcompany"],
+    userID:Uid
     
     
   }
+  console.log(application)
 
   useEffect(()=>{
     axios.get(`http://localhost:5000/user/apply/${onePost["idposts-company"]}`)
@@ -39,11 +42,11 @@ const [app,setApp]=useState([])
   
 const postApplication = (event) => {
   event.preventDefault();
-console.log(onePost)
+console.log(application)
   axios.post("http://localhost:5000/user/apply", application)
     .then((res) => {
-      console.log(res);
-      console.log(app)
+      window.location.reload();
+      
    
 
           axios.patch("http://localhost:5000/user/apply", post)

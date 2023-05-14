@@ -135,6 +135,15 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
+ALTER TABLE `mydb`.`applied_users_tab`
+DROP FOREIGN KEY `fk_posts-company_has_individual_posts-company1`;
+
+ALTER TABLE `mydb`.`applied_users_tab`
+ADD CONSTRAINT `fk_posts-company_has_individual_posts-company1`
+    FOREIGN KEY (`posts-company_idposts-company`, `posts-company_company_idcompany`)
+    REFERENCES `posts-company` (`idposts-company`, `company_idcompany`)
+    ON DELETE CASCADE;
+
 INSERT INTO `company` (`company_name`, `description`, `email`, `password`, `img`) VALUES
 ('ABC Company', 'We are a software development company based in California.', 'abc@example.com', 'password123', 'https://www.abcwebservice.com/wp-content/uploads/2018/04/Logo-2.jpg'),
 ('XYZ Inc.', 'We provide IT consulting services for businesses.', 'xyz@example.com', 'password456', 'https://www.mmaglobal.com/files/styles/member_logo_large/public/logos/xyzcorporatepro.png?itok=ehOUsiQj'),
@@ -157,3 +166,5 @@ VALUES
 ('Backend Developer Position Available', 'https://kinsta.com/wp-content/uploads/2021/11/Untitled-50.png', 'We are looking for a backend developer to join our team...', '2022-05-08', 7, 1, 'The ideal candidate should have experience with Python, SQL, and RESTful APIs...'),
 ('Sales Representative Wanted', 'https://compassplastics.com/wp-content/uploads/2017/05/sales.jpg', 'We are looking for a sales representative to help us grow our business...', '2022-05-09', 9, 5, 'The successful candidate will be responsible for generating leads, closing deals, and building relationships with customers...'),
 ('HR Manager Position Available', 'https://d341ezm4iqaae0.cloudfront.net/assets/2019/05/20231403/HR_Duties01.jpg', 'We are looking for an HR manager to oversee our HR operations...', '2022-05-10', 2, 4, 'The successful candidate will be responsible for recruiting, training, and managing our staff...') ;
+
+

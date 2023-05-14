@@ -21,13 +21,13 @@ import EditProfileCompany from "./EditProfileCompany"
 
 
 
-function CompanyDetails() {
+function ProfileDetails() {
   const navigate=useNavigate()
   const [data, setData] = useState({});
   const [posts, setPosts] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const location = useLocation();
-  var id = location.state.data.idcompany ;//this condition need to be checked 
+  var id = location.state.id//this condition need to be checked 
 
 console.log(id,"data")
 
@@ -110,9 +110,7 @@ console.log(id,"data")
      
       <h1>{data.description}</h1>
       <h1>{data.email}</h1>
-      {!isEditing && <Button variant="primary" onClick={handleEditProfile}>Edit Profile</Button>}
-        {isEditing && <EditProfileCompany data={[data]} onSave={handleSaveProfile} />}
-{<Button variant="primary" onClick={()=>navigate("/addpostCompony",{ state: { ids: id } })}>add post</Button>}
+    
 
       {posts.map((post) => {
 
@@ -133,21 +131,21 @@ const postDtails={
 
         return (
           <>
-           { console.log(post,"post")}
+           
           <MDBRow className="row-cols-1 row-cols-md-2 g-4">
           <MDBCol>
             {}
             <MDBCard onClick={()=>{
-             
+              console.log(postDtails)
               navigate("/PostDtails", { state: { data: postDtails } })} }>
               <MDBCardImage src={post.post_img} alt="..." position="top" />
               <MDBCardBody>
                 <MDBCardTitle>{post.post_title}</MDBCardTitle>
                 <MDBCardText>{post.post_description}</MDBCardText>
               </MDBCardBody> 
-              </MDBCard><Button variant="primary" onClick={(event)=>navigate("/SeeAppliers", { state: { idP: post } })}>see appliers</Button>
-          </MDBCol> <Button variant="primary" onClick={(event)=>handleDeletePost(event,post["idposts-company"])}>delete post</Button>
-        </MDBRow> <Button variant="primary" onClick={()=>navigate("/SeeAppliers",{ state: { id:post["idposts-company"] } })}>add post</Button>
+              </MDBCard>
+          </MDBCol>
+        </MDBRow> 
         </>
         )
       }
@@ -159,7 +157,7 @@ const postDtails={
   );
 }
 
-export default CompanyDetails;
+export default ProfileDetails;
 
 
 

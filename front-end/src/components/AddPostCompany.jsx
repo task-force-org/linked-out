@@ -9,9 +9,10 @@ const AddPostCompany = () => {
   const [posts_details , setPost_details ] = useState('');
   const navigate=useNavigate()
   const location=useLocation()
-  const id= location.state.id
+  const id= location.state.ids
+ 
 
-
+console.log(id,"add")
   const handlePic = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -24,7 +25,7 @@ const AddPostCompany = () => {
   const handleAddPost = () => {
 
     // Replace USER_ID with the actual ID of the user creating the post
-    const userID =id;
+   
 
     axios
       .post(`http://localhost:5000/company/post/${id}`, { 
@@ -33,15 +34,15 @@ const AddPostCompany = () => {
         post_description: post_description,
         post_date: moment().format('MMMM Do YYYY, h:mm a'),
         post_aplliers: 0,
-        company_idcompany: userID,
+        company_idcompany: id,
         posts_details: posts_details
       })
       .then(() => {
-        navigate("/companyDetails",);
+        window.history.back()
        
       })
       .catch((err) => {
-        console.log(id);
+        console.log(err);
       });
      
   };
