@@ -36,6 +36,7 @@ const AddPostCompany = () => {
       })
       .then(() => {
         window.history.back();
+        
       })
       .catch((err) => {
         console.log(err);

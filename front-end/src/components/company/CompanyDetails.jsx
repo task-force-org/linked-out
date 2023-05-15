@@ -28,7 +28,7 @@ function CompanyDetails() {
         },
       })
       .then(() => {
-        console.log("Post deleted successfully");
+        console.log("oui");
       })
       .catch((err) => {
         console.error("Error deleting post:", err);
@@ -80,15 +80,22 @@ function CompanyDetails() {
 
   return (
     <div className="wrapper">
-      <nav className="navbar"></nav>
       <div className="content">
         <div className="display-item">
           <div className="profile-container">
             <div className="card">
               <div className="card-top"></div>
+
               <div className="card-profile">
                 <div className="profile-image">
-                  <img src={data.img} alt="User Profile Pic" />
+                  <img
+                    src={data.img}
+                    onClick={() => {
+                      navigate("/");
+                      window.location.reload();
+                    }}
+                    alt="User Profile Pic"
+                  />
                 </div>
               </div>
               <div className="card-info">
@@ -159,9 +166,10 @@ function CompanyDetails() {
                       </button>
                       <button
                         className="see-appliers-btn"
-                        onClick={(event) =>
-                          navigate("/SeeAppliers", { state: { idP: post } })
-                        }
+                        onClick={(event) => {
+                          navigate("/SeeAppliers", { state: { idP: post } });
+                          window.location.reload();
+                        }}
                       >
                         See Appliers
                       </button>

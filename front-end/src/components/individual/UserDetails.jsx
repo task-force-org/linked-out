@@ -4,8 +4,6 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import EditProfile from "./EditProfil";
 
-import Navbar from "../home/Navbar";
-
 function UserDetails() {
   const navigate = useNavigate();
   const [data, setData] = useState({});
@@ -20,24 +18,6 @@ function UserDetails() {
       require("../css/login.css");
     }
   }, [location.pathname]);
-
-  const handleDeletePost = (event, postID) => {
-    console.log(postID);
-    const url = `http://localhost:5000/individual/posts/${postID}`;
-    axios
-      .delete(url, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then(() => {
-        console.log("Post deleted successfully");
-      })
-      .catch((err) => {
-        console.error("Error deleting post:", err);
-      });
-    window.location.reload();
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -119,7 +99,7 @@ function UserDetails() {
             </div>
           </div>
           <div className="btn">
-            <button class="edit-profile-btn" onClick={handleEditProfile}>
+            <button variant="primary" onClick={handleEditProfile}>
               Edit Profile
             </button>
             {isEditing && (

@@ -3,22 +3,21 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import EditProfile from "./company/EditProfileCompany";
-import "bootstrap/dist/css/bootstrap.css";
-
-import {
-  MDBCard,
-  MDBCardImage,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
-  MDBRow,
-  MDBCol,
-  MDBCardFooter,
-} from "mdb-react-ui-kit";
 
 function SeeAppliers() {
   const location = useLocation();
+
+  const reload = () => {
+    window.location.reload();
+    window.history.back();
+  };
+  useEffect(() => {
+    if (location.pathname === "/SeeAppliers") {
+      require("./css/Appliers.css");
+      require("./css/login.css");
+    }
+  }, [location.pathname]);
+
   const id = location.state.idP["idposts-company"];
   console.log(id, "idp");
   const [data, setData] = useState([]);
@@ -32,41 +31,42 @@ function SeeAppliers() {
       })
       .catch((err) => console.log(id, "ID"));
   };
+
   useEffect(() => {
     getAppliers();
   }, []);
   if (!data[0]) {
     console.log(data, "data");
-    return <h1>no appliers for the time being</h1>;
+    return (
+      <>
+        <h1>no appliers for the time being</h1>
+        <button onClick={() => reload()}>back</button>
+      </>
+    );
   } else if (data !== [])
     return (
       <>
         {data.map((e) => {
           return (
-            <>
-              <MDBRow className="row-cols-1 row-cols-md-2 g-4">
-                <MDBCol>
-                  <MDBCard>
-                    <MDBCardImage
-                      src={e.profile_pic}
-                      alt="..."
-                      position="top"
-                    />
-                    <MDBCardBody>
-                      <MDBCardTitle>{e.full_name}</MDBCardTitle>
-                      <MDBCardText>bio:{e.bio}</MDBCardText>
-                      <MDBCardText>Experiences:{e.experiences}</MDBCardText>
-                      <MDBCardText>Education:{e.education}</MDBCardText>
-                    </MDBCardBody>
-                    <MDBCardFooter>
-                      <small className="text-muted"> Email:{e.email}</small>
-                    </MDBCardFooter>
-                  </MDBCard>
-                </MDBCol>
-              </MDBRow>
-            </>
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+              <div class="col">
+                <div class="card">
+                  <img src={e.profile_pic} class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">{e.full_name}</h5>
+                    <p class="card-text">bio: {e.bio}</p>
+                    <p class="card-text">Experiences: {e.experiences}</p>
+                    <p class="card-text">Education: {e.education}</p>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">Email: {e.email}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
           );
         })}
+        <button onClick={() => reload()}>back</button>
       </>
     );
 }

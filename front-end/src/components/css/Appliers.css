@@ -1,0 +1,51 @@
+.card {
+    width: 500px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .card-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+  }
+  
+  .profile-name {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .profile-bio {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .profile-details {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .profile-details p {
+    margin: 0;
+  }
+  
+  .profile-details strong {
+    margin-right: 10px;
+  }
+  

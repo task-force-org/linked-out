@@ -25,7 +25,6 @@ function App() {
           <Route path="/userProfile" element={<UserDetails />} />
           <Route path="/SeeAppliers" element={<SeeAppliers />} />
           <Route path="/addpostCompony" element={<AddPostCompany />} />
-          {/* <Route path="/ProfileDetails" element={<ProfileDetails />} /> */}
         </Routes>
       </BrowserRouter>
     </>

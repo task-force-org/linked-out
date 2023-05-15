@@ -55,7 +55,7 @@ function Home() {
           {showAbout && (
             <>
               <img
-                src="https://o.remove.bg/downloads/4731a6c2-3627-4098-8065-791888e4b4f9/image-removebg-preview.png"
+                src="https://o.remove.bg/downloads/281c571c-fe5a-4e45-8d79-8e3767c4123d/Screenshot_2023-05-10_113927-removebg-preview.png"
                 alt=""
               />
 

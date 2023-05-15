@@ -67,7 +67,7 @@ const EditProfileCompany = (props) => {
           variant="primary"
           type="submit"
         >
-          Save Changes
+          Save
         </Button>
       </Form>
     </div>
